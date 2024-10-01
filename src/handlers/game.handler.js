@@ -1,11 +1,13 @@
 import { getGameAssets } from "../init/assets.js";
-import { getStage, setStage } from "../models/stage.model.js";
+import { clearStage, getStage, setStage } from "../models/stage.model.js";
 
 export const gameStart = (uuid, payload) => {
     // 스테이지 정보를 담을 바구니 만들기
     const { stages } =  getGameAssets();
+
+    clearStage(uuid);
     // stages 배열에서 0번째 = 첫번째 스테이지
-    setStage(uuid, stages.data[0].id, payload.timestmp);
+    setStage(uuid, stages.data[0].id, payload.timestamp);
     console.log('Stage: ', getStage(uuid));
     return {status: 'success'};
 }

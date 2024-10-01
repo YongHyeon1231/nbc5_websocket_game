@@ -1,6 +1,6 @@
 import { getGameAssets } from "../init/assets.js";
 import { getUsers, removeUser } from "../models/user.model.js"
-import { getStage, setStage } from "../models/stage.model.js";
+import { createStage, getStage, setStage } from "../models/stage.model.js";
 import { CLIENT_VERSION } from "../constants.js";
 import handlerMappings from "./handlerMapping.js";
 
@@ -14,6 +14,8 @@ export const handleConnection = (socket, userUUID) => {
     console.log(`New user connected!: ${userUUID} with socket ID ${socket.id}`);
     console.log('Current Users: ', getUsers());
 
+
+    createStage(userUUID);
     // socket.emit은 본인에게 보내는 것
     socket.emit('connection', {uuid: userUUID});
 }
